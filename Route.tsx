@@ -34,12 +34,12 @@ function Route() {
         <Stack.Screen
           name="CharactersList"
           component={CharactersList}
-          options={{title: 'Comic List'}}
+          options={{title: 'Character List'}}
         />
         <Stack.Screen
           name="CharacterDetail"
           component={CharacterDetail}
-          options={{title: 'Comic Detail'}}
+          options={{title: 'Character Detail'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
