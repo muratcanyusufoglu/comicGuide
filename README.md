@@ -29,7 +29,7 @@ Sayfanın en aşağısına inildiğinde yeni comic booklar ekrana getirildi.
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202023-04-08%20at%2005.05.34.png" alt="drawing" style="width:240px;"/>
 </p>
 
-Detay sayfası yukarıdaki gibi oluşturuldu. Karakter listesi de ekrana getirildi. Karakterlere tıklandığında karakter detay sayfasına gidilir bir yapı oluşturuldu.
+Comic detay sayfası aşağıdaki gibi oluşturuldu. Karakter listesi de ekrana getirildi. Karakterlere tıklandığında karakter detay sayfasına gidilir bir yapı oluşturuldu.
 <p float="left">
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202023-04-08%20at%2005.06.03.png" alt="drawing" style="width:240px;"/>
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/simulator_screenshot_F41A766F-4F73-41EF-BEC1-B9084B74F445.png" alt="drawing" style="width:240px;"/>
@@ -40,6 +40,8 @@ Pagination, arama bölümü ve detay bölümüyle comic sayfalarındaki özellik
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202023-04-08%20at%2005.36.40.png.png" alt="drawing" style="width:240px;"/>
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/simulator_screenshot_51252F1E-FED1-4081-94F0-131941E790CA.png" alt="drawing" style="width:240px;"/>
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/simulator_screenshot_3D503FCE-F434-4F22-B661-F95C68E0D5FB.png" alt="drawing" style="width:240px;"/>
+</p>
+<p float="left">
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/simulator_screenshot_7920A722-C2BC-427D-A8D3-F5DB26F15A10.png" alt="drawing" style="width:240px;"/>
 <img src="https://github.com/muratcanyusufoglu/comicGuide/blob/main/assets/screenShots/simulator_screenshot_6B444AC0-CB8F-4962-9371-FDB9907F88A7.png" alt="drawing" style="width:240px;"/>
 </p>
