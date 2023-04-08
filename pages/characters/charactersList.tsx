@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * Sample React Native ComicsList
  * https://github.com/facebook/react-native
  *
  * Generated with the TypeScript template
@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -25,17 +25,18 @@ import {ListItem, SearchBar} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import axios from 'axios';
 import Config from 'react-native-config';
+import {useNavigation} from '@react-navigation/native';
 
 const window = Dimensions.get('window');
-const App = () => {
+const CharactersList = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const ADRESS = Config.API_URL_COMICS;
   const ADR =
-    'https://gateway.marvel.com/v1/public/comics?ts=1&apikey=f0e95c14605f9caac51e3a81b601c147&hash=ce2d8f9113df06238f662b13066281ba';
+    'https://gateway.marvel.com/v1/public/characters?ts=1&apikey=f0e95c14605f9caac51e3a81b601c147&hash=ce2d8f9113df06238f662b13066281ba';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const [comicList, setComicList] = useState();
+  const [characterList, setcharacterList] = useState();
   const [pagination, setPagination] = useState<number>(20);
   const [searchValue, setSearchValue] = useState();
 
@@ -51,9 +52,7 @@ const App = () => {
           },
         })
         .then(item => {
-          console.log('adress', item.data.data.results);
-          setComicList(item.data.data.results);
-          console.log('image', item.data.data.results[4].images[0].path);
+          setcharacterList(item.data.data.results);
 
           //setFollowers(item.data);
         })
@@ -68,12 +67,12 @@ const App = () => {
   };
 
   const searchFunction = (text: string) => {
-    const updatedData = comicList.filter(item => {
-      const item_data = `${item.title.toUpperCase()})`;
+    const updatedData = characterList?.filter(item => {
+      const item_data = `${item.name.toUpperCase()})`;
       const text_data = text.toUpperCase();
       return item_data.indexOf(text_data) > -1;
     });
-    setComicList(updatedData);
+    setcharacterList(updatedData);
   };
 
   return (
@@ -91,8 +90,8 @@ const App = () => {
         autoCorrect={false}
       />
       <FlatList
-        extraData={comicList}
-        data={comicList}
+        extraData={characterList}
+        data={characterList}
         numColumns={1}
         style={{}}
         onEndReached={handleOnEndReached}
@@ -103,14 +102,23 @@ const App = () => {
 };
 
 function InsideFlatlist({item}) {
-  const imageUri = item.images[0]
-    ? item.images[0].path.replace('http', 'https')
+  const imageUri = item.thumbnail
+    ? item.thumbnail.path.replace('http', 'https')
     : null;
-  const imageUrl = item.images[0] ? `${imageUri}.jpg` : null;
-  console.log('imageUrl', imageUrl);
+  const imageUrl = item.thumbnail ? `${imageUri}.jpg` : null;
+  console.log('imageUrl', item);
+
+  const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate(
+          'CharacterDetail' as never,
+          {characterDetail: item.id, imageUrl: imageUrl} as never,
+        )
+      }>
       <Image
         source={{
           uri: imageUrl,
@@ -119,11 +127,19 @@ function InsideFlatlist({item}) {
         resizeMode="cover"
       />
       <View style={styles.textContainer}>
-        <Text style={styles.titleText}>{item.title}</Text>
+        <Text style={styles.titleText}>{item.name}</Text>
         <Text numberOfLines={3} style={styles.textFonts}>
           {item.description}
         </Text>
-        <Text style={styles.textFonts}>Page Count : {item.pageCount}</Text>
+        <Text style={styles.textFonts}>
+          Toplam Çizgi Roman : {item.comics.available}
+        </Text>
+        <Text style={styles.textFonts}>
+          Toplam Story : {item.stories.available}
+        </Text>
+        <Text style={styles.textFonts}>
+          Toplam Series : {item.series.available}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -164,4 +180,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default CharactersList;

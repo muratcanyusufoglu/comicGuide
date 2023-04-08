@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * Sample React Native ComicsList
  * https://github.com/facebook/react-native
  *
  * Generated with the TypeScript template
@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -25,9 +25,10 @@ import {ListItem, SearchBar} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import axios from 'axios';
 import Config from 'react-native-config';
+import {useNavigation} from '@react-navigation/native';
 
 const window = Dimensions.get('window');
-const App = () => {
+const ComicsList = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const ADRESS = Config.API_URL_COMICS;
   const ADR =
@@ -44,18 +45,11 @@ const App = () => {
       await axios
         .get(ADR, {
           params: {
-            // ts: 1,
-            // apikey: 'f0e95c14605f9caac51e3a81b601c147',
-            // hash: 'ce2d8f9113df06238f662b13066281ba',
             limit: pagination,
           },
         })
         .then(item => {
-          console.log('adress', item.data.data.results);
           setComicList(item.data.data.results);
-          console.log('image', item.data.data.results[4].images[0].path);
-
-          //setFollowers(item.data);
         })
         .catch(error => console.log('error', error, ADRESS));
     };
@@ -107,10 +101,19 @@ function InsideFlatlist({item}) {
     ? item.images[0].path.replace('http', 'https')
     : null;
   const imageUrl = item.images[0] ? `${imageUri}.jpg` : null;
-  console.log('imageUrl', imageUrl);
+  console.log('imageUrl', item);
+
+  const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate(
+          'ComicDetail' as never,
+          {comicDetail: item, imageUrl: imageUrl} as never,
+        )
+      }>
       <Image
         source={{
           uri: imageUrl,
@@ -164,4 +167,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default ComicsList;
